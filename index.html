@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#0f172a" />
+    <title>ゴルフスイング診断</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="title-wrap">
+          <p class="eyebrow">iPhone / Safari</p>
+          <h1>ゴルフスイング診断</h1>
+        </div>
+        <button id="cameraButton" class="primary-button">撮影開始</button>
+      </header>
+
+      <main class="layout">
+        <section class="camera-card card">
+          <div class="video-stage">
+            <video id="video" autoplay playsinline muted></video>
+            <canvas id="overlay"></canvas>
+          </div>
+
+          <div class="toolbar">
+            <button id="captureButton" class="secondary-button">診断を保存</button>
+            <button id="resetButton" class="ghost-button">基準を再設定</button>
+          </div>
+        </section>
+
+        <aside class="panel card">
+          <div class="status-box">
+            <span class="status-label">ステータス</span>
+            <p id="statusText">カメラを起動してください</p>
+          </div>
+
+          <div class="info-grid">
+            <div class="info-item">
+              <label>骨格</label>
+              <strong id="detectedStatus">未検出</strong>
+            </div>
+            <div class="info-item">
+              <label>判定</label>
+              <strong id="currentPhase">待機中</strong>
+            </div>
+            <div class="info-item">
+              <label>総合点</label>
+              <strong id="overallPoint">0点</strong>
+            </div>
+            <div class="info-item">
+              <label>保存</label>
+              <strong id="saveStatus">未保存</strong>
+            </div>
+          </div>
+        </aside>
+      </main>
+
+      <section class="diagnostic-card card">
+        <div class="section-header">
+          <h2>診断項目</h2>
+        </div>
+
+        <div class="phase-grid">
+          <article class="phase-card" data-phase="address">
+            <div class="phase-top">
+              <h3>アドレス</h3>
+              <span id="phase-address-score" class="score-pill">0点</span>
+            </div>
+            <p id="phase-address-summary" class="phase-summary">判定待機中</p>
+          </article>
+
+          <article class="phase-card" data-phase="takeaway">
+            <div class="phase-top">
+              <h3>テークバック</h3>
+              <span id="phase-takeaway-score" class="score-pill">0点</span>
+            </div>
+            <p id="phase-takeaway-summary" class="phase-summary">判定待機中</p>
+          </article>
+
+          <article class="phase-card" data-phase="top">
+            <div class="phase-top">
+              <h3>トップ</h3>
+              <span id="phase-top-score" class="score-pill">0点</span>
+            </div>
+            <p id="phase-top-summary" class="phase-summary">判定待機中</p>
+          </article>
+
+          <article class="phase-card" data-phase="downswing">
+            <div class="phase-top">
+              <h3>切り返し</h3>
+              <span id="phase-downswing-score" class="score-pill">0点</span>
+            </div>
+            <p id="phase-downswing-summary" class="phase-summary">判定待機中</p>
+          </article>
+
+          <article class="phase-card" data-phase="impact">
+            <div class="phase-top">
+              <h3>インパクト</h3>
+              <span id="phase-impact-score" class="score-pill">0点</span>
+            </div>
+            <p id="phase-impact-summary" class="phase-summary">判定待機中</p>
+          </article>
+
+          <article class="phase-card" data-phase="finish">
+            <div class="phase-top">
+              <h3>フィニッシュ</h3>
+              <span id="phase-finish-score" class="score-pill">0点</span>
+            </div>
+            <p id="phase-finish-summary" class="phase-summary">判定待機中</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="history-card card">
+        <div class="section-header">
+          <h2>診断履歴</h2>
+        </div>
+        <ul id="historyList" class="history-list"></ul>
+      </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose/pose.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
